@@ -1,0 +1,56 @@
+﻿@inherits LayoutComponentBase
+
+<header>
+    <NavMenu />
+</header>
+
+<div class="container">
+
+    <main id="main" role="main" class="pb-3">
+        @Body
+    </main>
+
+    <footer class="footer text-muted bottom-0">
+        <div class="ps-2">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 text-center">&copy; Copyright @DateTime.Now.Year. All Rights Reserved - Designed by ZYT</div>
+                <div class="col-sm-2 text-center"><NavLink href="Privacy">Privacy </NavLink> | <NavLink href="Cookie"> Cookie</NavLink></div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+
+<script>
+
+    function copyToClipboard(text) {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        alert('Email address copied to clipboard!');
+    }
+
+    function ChangeColor(){
+        if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+            document.documentElement.setAttribute('data-bs-theme', 'light')
+        }
+        else {
+            document.documentElement.setAttribute('data-bs-theme', 'dark')
+        }
+    }
+
+    // document.getElementById('btnTheme').addEventListener('click', () => {
+    //     if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+    //         document.documentElement.setAttribute('data-bs-theme', 'light')
+    //     }
+    //     else {
+    //         document.documentElement.setAttribute('data-bs-theme', 'dark')
+    //     }
+    // })
+</script>
+
