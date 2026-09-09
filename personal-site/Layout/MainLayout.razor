@@ -1,54 +1,19 @@
 ﻿@inherits LayoutComponentBase
 
-<header class="sticky-top bg-body">
-    <NavMenu />
-</header>
+<div class="site-layout">
+    <header class="sticky-top bg-body">
+        <NavMenu />
+    </header>
 
-<div class="container">
-    <main id="main" role="main" class="pb-3">
+    <main id="main" role="main" class="container flex-grow-1 pb-3">
         @Body
     </main>
+
+    <footer class="footer text-muted bg-body pb-1">
+        <div class="px-2">
+            <div>&copy; Copyright @DateTime.Now.Year. All Rights Reserved - Designed by ZYT</div>
+            <div><NavLink href="Privacy">Privacy </NavLink> | <NavLink href="Cookie"> Cookie</NavLink></div>
+        </div>
+    </footer>
 </div>
-
-<footer class="footer text-muted bg-body pb-1">
-    <div class="ps-2">
-        <div class="row">
-            <div class="text-center">&copy; Copyright @DateTime.Now.Year. All Rights Reserved - Designed by ZYT</div>
-        </div>
-        <div class="row">
-            <div class="text-center"><NavLink href="Privacy">Privacy </NavLink> | <NavLink href="Cookie"> Cookie</NavLink></div>
-        </div>
-    </div>
-</footer>
-
-<script>
-
-    function copyToClipboard(text) {
-        const el = document.createElement('textarea');
-        el.value = text;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-        alert('Email address copied to clipboard!');
-    }
-
-    function ChangeColor(){
-        if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-            document.documentElement.setAttribute('data-bs-theme', 'light')
-        }
-        else {
-            document.documentElement.setAttribute('data-bs-theme', 'dark')
-        }
-    }
-
-    // document.getElementById('btnTheme').addEventListener('click', () => {
-    //     if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-    //         document.documentElement.setAttribute('data-bs-theme', 'light')
-    //     }
-    //     else {
-    //         document.documentElement.setAttribute('data-bs-theme', 'dark')
-    //     }
-    // })
-</script>
 
