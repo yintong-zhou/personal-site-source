@@ -19,10 +19,32 @@ html {
     font-size: 16px;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 body {
     font-family: Rubik;
+    width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.site-layout {
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+#main {
+    min-width: 0;
+}
+
+img,
+svg {
+    max-width: 100%;
 }
 
 footer {
@@ -113,8 +135,7 @@ svg {
     }
 
 .footer {
-    position: fixed;
     width: 100%;
-    bottom: 0;
+    min-width: 0;
     text-align: center;
 }
