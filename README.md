@@ -6,14 +6,14 @@ Il progetto presenta il profilo professionale, le competenze tecniche e i colleg
 ## Stack tecnologico
 
 - [.NET 8](https://dotnet.microsoft.com/)
-- [Blazor Web App](https://learn.microsoft.com/aspnet/core/blazor/) con rendering lato server/SSR
-- ASP.NET Core
+- [Blazor WebAssembly](https://learn.microsoft.com/aspnet/core/blazor/) standalone (client-side)
 - C# e Razor components
 - Bootstrap 5 e Bootstrap Icons
 - jQuery
 - Font Rubik locale
+- [BlazorWasmPreRendering.Build](https://www.nuget.org/packages/BlazorWasmPreRendering.Build) per il prerendering statico delle pagine in fase di publish (SEO)
 
-L'applicazione è un progetto web SDK-style (`Microsoft.NET.Sdk.Web`) e non utilizza un backend applicativo o un database dedicato: i contenuti del portfolio sono definiti nei componenti Razor e negli asset statici.
+L'applicazione è un progetto Blazor WebAssembly standalone (`Microsoft.NET.Sdk.BlazorWebAssembly`) e non utilizza un backend applicativo o un database dedicato: i contenuti del portfolio sono definiti nei componenti Razor e negli asset statici, ed è pensata per l'hosting statico (es. Cloudflare Pages).
 
 ## Funzionalità
 
@@ -84,7 +84,9 @@ Per creare gli artefatti di pubblicazione:
 dotnet publish .\personal-site\personal-site.csproj --configuration Release --output .\publish
 ```
 
-La directory `publish` può essere distribuita su un ambiente compatibile con ASP.NET Core e .NET 8. La configurazione del provider di hosting e del dominio non è inclusa in questo repository.
+Il comando esegue anche il prerendering statico di ogni pagina raggiungibile (vedi sopra). La directory da distribuire è **`publish\wwwroot`** (non `publish` stesso, che contiene anche file di manifest non necessari all'hosting) — è un sito interamente statico, distribuibile su qualunque hosting per file statici (es. Cloudflare Pages, Netlify, GitHub Pages), senza bisogno di un runtime ASP.NET Core. La configurazione del provider di hosting e del dominio non è inclusa in questo repository.
+
+Per l'hosting su piattaforme SPA (come Cloudflare Pages), il file `wwwroot/_redirects` instrada le richieste non corrispondenti a un file statico verso `index.html`, in modo che il routing lato client di Blazor funzioni correttamente.
 
 ## Struttura del progetto
 
@@ -92,12 +94,12 @@ La directory `publish` può essere distribuita su un ambiente compatibile con AS
 .
 ├── personal-site.sln
 ├── personal-site/
-│   ├── App.razor                 # HTML radice e routing Blazor
-│   ├── Program.cs                # Configurazione e pipeline ASP.NET Core
+│   ├── App.razor                 # Router radice Blazor
+│   ├── Program.cs                # Bootstrap dell'host WebAssembly
 │   ├── Layout/                   # Layout, navigazione e componenti parziali
 │   ├── Pages/                    # Pagine raggiungibili tramite route
 │   ├── Properties/               # Profili di avvio locali
-│   └── wwwroot/                  # CSS, JavaScript, immagini, font e librerie
+│   └── wwwroot/                  # index.html, CSS, JavaScript, immagini, font e librerie
 └── README.md
 ```
 
